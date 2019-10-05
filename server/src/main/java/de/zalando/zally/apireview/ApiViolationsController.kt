@@ -11,16 +11,9 @@ import de.zalando.zally.rule.RulesPolicy
 import de.zalando.zally.rule.api.Severity
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.CrossOrigin
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestHeader
-import org.springframework.web.bind.annotation.ResponseBody
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 import org.springframework.web.util.UriComponentsBuilder
-import java.util.UUID
+import java.util.*
 
 @CrossOrigin
 @RestController
@@ -69,8 +62,11 @@ class ApiViolationsController(
         return buildApiDefinitionResponse(review)
     }
 
-    private fun retrieveRulesPolicy(request: ApiDefinitionRequest): RulesPolicy = request.ignoreRules
-        .let { configPolicy.withMoreIgnores(request.ignoreRules) }
+    private fun retrieveRulesPolicy(request: ApiDefinitionRequest): RulesPolicy {
+        val policy = request.ignoreRules
+            .let { configPolicy.withMoreIgnores(it) }
+        return request.minSeverity?.let { policy.withMinSeverity(it) } ?: policy
+    }
 
     private fun retrieveApiDefinition(request: ApiDefinitionRequest): String = try {
         apiDefinitionReader.read(request)

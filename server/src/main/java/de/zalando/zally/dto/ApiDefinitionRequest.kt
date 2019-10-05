@@ -2,6 +2,7 @@ package de.zalando.zally.dto
 
 import com.fasterxml.jackson.annotation.JsonRawValue
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize
+import de.zalando.zally.rule.api.Severity
 import de.zalando.zally.util.JsonRawValueDeserializer
 
 data class ApiDefinitionRequest(
@@ -14,7 +15,10 @@ data class ApiDefinitionRequest(
 
     val apiDefinitionUrl: String? = null,
 
-    val ignoreRules: List<String> = emptyList()
+    val ignoreRules: List<String> = emptyList(),
+
+    //TODO probably not the best place because of POST request.
+    val minSeverity: Severity? = null
 ) {
     /** for java invocations: it doesn't have overloaded constructors */
     companion object Factory {
