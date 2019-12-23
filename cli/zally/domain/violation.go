@@ -7,14 +7,14 @@ import (
 
 // Violation keeps information about Zally violations
 type Violation struct {
-	Title         string   `json:"title"`
-	Description   string   `json:"description"`
-	ViolationType string   `json:"violation_type"`
-	RuleLink      string   `json:"rule_link"`
-	Pointer       string   `json:"pointer"`
-	StartLine     int      `json:"start_line"`
-	EndLine       int      `json:"end_line"`
-	Paths         []string `json:"paths"`
+	Title         string        `json:"title"`
+	Description   string        `json:"description"`
+	ViolationType ViolationType `json:"violation_type"`
+	RuleLink      string        `json:"rule_link"`
+	Pointer       string        `json:"pointer"`
+	StartLine     int           `json:"start_line"`
+	EndLine       int           `json:"end_line"`
+	Paths         []string      `json:"paths"`
 }
 
 // ToPointerDisplayString returns the pointer of the violation in user friendly display format

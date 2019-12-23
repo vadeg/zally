@@ -10,7 +10,7 @@ func TestViolation(t *testing.T) {
 	var violation Violation
 	violation.Title = "A Title"
 	violation.RuleLink = "http://example.com/"
-	violation.ViolationType = "MUST"
+	violation.ViolationType = Must
 	violation.Description = "Description"
 
 	t.Run("ToPointerDisplayString returns path without leading slash", func(t *testing.T) {

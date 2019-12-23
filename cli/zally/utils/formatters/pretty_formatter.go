@@ -91,7 +91,7 @@ func (f *PrettyFormatter) formatHeader(header string) string {
 func (f *PrettyFormatter) formatViolation(violation *domain.Violation) string {
 	var buffer bytes.Buffer
 
-	colorize := f.colorizer.ColorizeByTypeFunc(violation.ViolationType)
+	colorize := f.colorizer.ColorizeByTypeFunc(violation.ViolationType.String())
 
 	fmt.Fprintf(&buffer, "%s %s\n", colorize(violation.ViolationType), colorize(violation.Title))
 	fmt.Fprintf(&buffer, "\t%s\n", violation.Description)

@@ -21,6 +21,14 @@ var LintCommand = cli.Command{
 	Usage:     "Lint given `FILE` with API definition",
 	Action:    lint,
 	ArgsUsage: "FILE",
+	Flags: []cli.Flag{
+		cli.StringFlag{
+			Name: "min-severity",
+			Usage: `The minimum required violation severity. Can be one of [must|should|may|hint]. 
+	The level order is 'must->should->may->hint'. Lower levels include violations from upper levels`,
+			Value: "must",
+		},
+	},
 }
 
 func lint(c *cli.Context) error {
